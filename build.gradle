@@ -1,0 +1,56 @@
+buildscript {
+    ext {
+        springBootVersion = '2.0.2.RELEASE'
+        cloverPluginVersion = '2.2.1'
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("com.bmuschko:gradle-clover-plugin:${cloverPluginVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'com.bmuschko.clover'
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    springfoxSwagger2Version = '2.8.0'
+    springfoxSwaggerUiVersion = '2.8.0'
+    h2Version = '1.4.197'
+    cloverVersion = '4.2.1'
+}
+
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile("io.springfox:springfox-swagger2:${springfoxSwagger2Version}")
+    compile("io.springfox:springfox-swagger-ui:${springfoxSwaggerUiVersion}")
+    runtime('mysql:mysql-connector-java')
+    compileOnly('org.projectlombok:lombok')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile("com.h2database:h2:${h2Version}")
+    clover("org.openclover:clover:${cloverVersion}")
+}
+
+clover {
+    testIncludes = ['**/*Tests.java']
+    report {
+        html = true
+    }
+}
