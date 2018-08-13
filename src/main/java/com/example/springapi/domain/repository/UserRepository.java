@@ -2,19 +2,18 @@ package com.example.springapi.domain.repository;
 
 import com.example.springapi.domain.object.User;
 
-import java.util.Optional;
-
 /**
  * インフラ層とのインタフェース
  */
 public interface UserRepository {
+
     /**
      * ユーザ検索
      *
      * @param id 検索したいユーザID
      * @return ユーザ
      */
-    Optional<User> findById(String id);
+    User findById(String id);
 
     /**
      * ユーザ作成、更新

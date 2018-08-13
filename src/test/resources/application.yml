@@ -4,3 +4,7 @@ spring:
     url: jdbc:h2:mem:;DB_CLOSE_ON_EXIT=TRUE;MODE=MySQL
     username: sa
     password:
+
+  jpa:
+    hibernate:
+      ddl-auto: none

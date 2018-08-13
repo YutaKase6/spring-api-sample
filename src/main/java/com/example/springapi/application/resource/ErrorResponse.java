@@ -25,4 +25,3 @@ public class ErrorResponse {
         private final String code;
     }
 }
-

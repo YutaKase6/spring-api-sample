@@ -1,7 +1,6 @@
 package com.example.springapi.application;
 
 import com.example.springapi.application.controller.UserController;
-import com.example.springapi.application.exception.NotFoundException;
 import com.example.springapi.application.resource.UserBody;
 import com.example.springapi.domain.object.User;
 import com.example.springapi.domain.service.UserService;
@@ -10,10 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -47,21 +43,11 @@ public class UserControllerTests {
     @Test
     public void findById() {
 
-        when(this.userService.findById(TEST_ID)).thenReturn(Optional.of(this.testUser));
+        when(this.userService.findById(TEST_ID)).thenReturn(this.testUser);
 
         User actual = this.userController.findById(TEST_ID);
 
         assertThat(actual).isEqualTo(this.testUser);
-
-        verify(this.userService, times(1)).findById(TEST_ID);
-    }
-
-    @Test(expected = NotFoundException.class)
-    public void findById404() {
-
-        when(this.userService.findById(TEST_ID)).thenReturn(Optional.empty());
-
-        this.userController.findById(TEST_ID);
 
         verify(this.userService, times(1)).findById(TEST_ID);
     }
@@ -80,16 +66,6 @@ public class UserControllerTests {
 
     @Test
     public void deleteById() {
-
-        this.userController.deleteById(TEST_ID);
-
-        verify(this.userService, times(1)).deleteById(TEST_ID);
-    }
-
-    @Test(expected = NotFoundException.class)
-    public void deleteByIdNotFound() {
-
-        doThrow(new EmptyResultDataAccessException(1)).when(this.userService).deleteById(TEST_ID);
 
         this.userController.deleteById(TEST_ID);
 

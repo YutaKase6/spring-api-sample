@@ -10,8 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Optional;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -41,11 +39,11 @@ public class UserServiceTests {
     @Test
     public void findById() {
 
-        when(this.userRepository.findById(TEST_ID)).thenReturn(Optional.of(this.testUser));
+        when(this.userRepository.findById(TEST_ID)).thenReturn(this.testUser);
 
-        Optional<User> actual = this.userService.findById(TEST_ID);
+        User actual = this.userService.findById(TEST_ID);
 
-        assertThat(actual.get()).isEqualTo(this.testUser);
+        assertThat(actual).isEqualTo(this.testUser);
 
         verify(this.userRepository, times(1)).findById(TEST_ID);
     }

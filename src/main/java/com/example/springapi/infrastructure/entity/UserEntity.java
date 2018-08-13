@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.sql.Timestamp;
 
 /**
  * RDBレコードのマッピング用クラス
@@ -27,6 +28,9 @@ public class UserEntity {
 
     @Column(name = "value")
     private String value;
+
+    @Column(name = "updated_at")
+    private Timestamp updatedAt;
 
     /**
      * ドメインオブジェクトからインスタンスを生成

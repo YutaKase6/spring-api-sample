@@ -50,7 +50,7 @@ public class UserRepositoryImplTests {
 
         when(this.userJpaRepository.findById(TEST_ID)).thenReturn(Optional.of(this.testUserEntity));
 
-        User actual = this.userRepositoryImpl.findById(TEST_ID).get();
+        User actual = this.userRepositoryImpl.findById(TEST_ID);
 
         assertThat(actual).isEqualTo(this.testUser);
 

@@ -11,17 +11,17 @@ public class UserEntityTests {
     private final static String TEST_ID = "test_id";
     private final static String TEST_VALUE = "test_value";
 
-    private User testUser;
-    private UserEntity testUserEntity;
+    private User expectedUser;
+    private UserEntity expectedUserEntity;
 
     @Before
     public void setup() {
-        this.testUser = User.builder()
+        this.expectedUser = User.builder()
                 .id(TEST_ID)
                 .value(TEST_VALUE)
                 .build();
 
-        this.testUserEntity = UserEntity.builder()
+        this.expectedUserEntity = UserEntity.builder()
                 .id(TEST_ID)
                 .value(TEST_VALUE)
                 .build();
@@ -29,17 +29,17 @@ public class UserEntityTests {
 
     @Test
     public void buildTests() {
-        UserEntity actual = UserEntity.build(this.testUser);
+        UserEntity actual = UserEntity.build(this.expectedUser);
 
-        assertThat(actual.getId()).isEqualTo(this.testUser.getId());
-        assertThat(actual.getValue()).isEqualTo(this.testUser.getValue());
+        assertThat(actual.getId()).isEqualTo(this.expectedUser.getId());
+        assertThat(actual.getValue()).isEqualTo(this.expectedUser.getValue());
     }
 
     @Test
     public void toDomainTests() {
-        User actual = this.testUserEntity.toDomainUser();
+        User actual = this.expectedUserEntity.toDomainUser();
 
-        assertThat(actual.getId()).isEqualTo(this.testUserEntity.getId());
-        assertThat(actual.getValue()).isEqualTo(this.testUserEntity.getValue());
+        assertThat(actual.getId()).isEqualTo(this.expectedUserEntity.getId());
+        assertThat(actual.getValue()).isEqualTo(this.expectedUserEntity.getValue());
     }
 }

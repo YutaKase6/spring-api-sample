@@ -3,8 +3,6 @@ package com.example.springapi.domain.object;
 import lombok.Builder;
 import lombok.Data;
 
-import java.io.Serializable;
-
 /**
  * ユーザ
  */

@@ -1,14 +1,13 @@
 package com.example.springapi.application.controller;
 
-import com.example.springapi.application.exception.NotFoundException;
 import com.example.springapi.application.resource.ErrorResponse;
 import com.example.springapi.application.resource.UserBody;
 import com.example.springapi.domain.object.User;
 import com.example.springapi.domain.service.UserService;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -17,15 +16,12 @@ import org.springframework.web.bind.annotation.*;
  * ユーザ操作のコントローラ
  */
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(path = "/v1/users")
 public class UserController {
 
+    @NonNull
     private final UserService userService;
-
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     /**
      * ユーザ検索
@@ -40,8 +36,7 @@ public class UserController {
     @GetMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public User findById(@PathVariable("id") String id) {
-        // 検索しようとしたIDが存在しない場合はNotFoundExceptionをthrow
-        return this.userService.findById(id).orElseThrow(() -> new NotFoundException("", id));
+        return this.userService.findById(id);
     }
 
     /**
@@ -72,11 +67,6 @@ public class UserController {
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable("id") String id) {
-        try {
-            this.userService.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
-            // 削除しようとしたIDが存在しない
-            throw new NotFoundException(e.getMessage(), id);
-        }
+        this.userService.deleteById(id);
     }
 }

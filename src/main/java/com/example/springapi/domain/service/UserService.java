@@ -1,23 +1,21 @@
 package com.example.springapi.domain.service;
 
+import com.example.springapi.domain.exception.NotFoundException;
 import com.example.springapi.domain.object.User;
 import com.example.springapi.domain.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 /**
  * ユーザ操作のロジック
  */
 @Service
+@RequiredArgsConstructor
 public class UserService {
-    private final UserRepository userRepository;
 
-    @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    @NonNull
+    private final UserRepository userRepository;
 
     /**
      * ユーザ検索
@@ -25,7 +23,7 @@ public class UserService {
      * @param id 検索したいユーザID
      * @return ユーザ
      */
-    public Optional<User> findById(String id) {
+    public User findById(String id) {
         return this.userRepository.findById(id);
     }
 

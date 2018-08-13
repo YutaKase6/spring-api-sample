@@ -20,6 +20,7 @@ public class SwaggerConfig {
     @Bean
     public Docket swaggerSpringMvcPlugin() {
         return new Docket(DocumentationType.SWAGGER_2)
+                .useDefaultResponseMessages(false)
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.regex("/v1.*"))

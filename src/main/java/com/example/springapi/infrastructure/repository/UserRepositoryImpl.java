@@ -1,34 +1,33 @@
 package com.example.springapi.infrastructure.repository;
 
+import com.example.springapi.domain.exception.NotFoundException;
 import com.example.springapi.domain.object.User;
 import com.example.springapi.domain.repository.UserRepository;
 import com.example.springapi.infrastructure.entity.UserEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
-
-import java.util.Optional;
 
 /**
  * 永続化の実装クラス
  * ドメインオブジェクトをEntityに変換してJPAをラップする
  */
 @Repository
+@RequiredArgsConstructor
 public class UserRepositoryImpl implements UserRepository {
 
+    @NonNull
     private final UserJpaRepository userJpaRepository;
-
-    @Autowired
-    public UserRepositoryImpl(UserJpaRepository userJpaRepository) {
-        this.userJpaRepository = userJpaRepository;
-    }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Optional<User> findById(String id) {
+    public User findById(String id) {
         return this.userJpaRepository.findById(id)
-                .map(UserEntity::toDomainUser);
+                .orElseThrow(() -> new NotFoundException(id + " is not found."))
+                .toDomainUser();
     }
 
     /**
@@ -45,6 +44,11 @@ public class UserRepositoryImpl implements UserRepository {
      */
     @Override
     public void deleteById(String id) {
-        this.userJpaRepository.deleteById(id);
+        try {
+            this.userJpaRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            // 削除しようとしたIDが存在しない
+            throw new NotFoundException(e.getMessage());
+        }
     }
 }
