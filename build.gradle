@@ -31,6 +31,7 @@ ext {
     springfoxSwagger2Version = '2.8.0'
     springfoxSwaggerUiVersion = '2.8.0'
     h2Version = '1.4.197'
+    restAssuredVersion = '3.3.0'
     cloverVersion = '4.2.1'
 }
 
@@ -45,6 +46,7 @@ dependencies {
     compileOnly('org.projectlombok:lombok')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile("com.h2database:h2:${h2Version}")
+    testCompile("io.rest-assured:rest-assured:${restAssuredVersion}")
     clover("org.openclover:clover:${cloverVersion}")
 }
 
