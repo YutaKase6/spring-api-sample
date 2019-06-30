@@ -1,4 +1,4 @@
-package com.example.springapi.infrastructure.entity;
+package com.example.springapi.infrastructure.user.entity;
 
 import com.example.springapi.domain.object.User;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
-package com.example.springapi.infrastructure.repository;
+package com.example.springapi.infrastructure.user.repository;
 
-import com.example.springapi.infrastructure.entity.UserEntity;
+import com.example.springapi.infrastructure.user.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

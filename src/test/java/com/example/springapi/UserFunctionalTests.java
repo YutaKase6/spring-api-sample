@@ -19,7 +19,7 @@ import static org.hamcrest.Matchers.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class UserApiTests {
+public class UserFunctionalTests {
     private final static String TABLE = "test_users";
     private static final String SELECT_SQL = String.format("SELECT * FROM %s WHERE ID = ?", TABLE);
 
@@ -40,9 +40,11 @@ public class UserApiTests {
     public void getUserById() {
         RestAssured.given()
                 .basePath(BASE_PATH)
+                .when()
                 .get("/{user_id}", "test_id")
                 .then()
                 .statusCode(HttpStatus.OK.value())
+                .contentType(equalTo(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .body("id", equalTo("test_id"))
                 .body("value", equalTo("test_value"));
     }
@@ -51,9 +53,11 @@ public class UserApiTests {
     public void getUserById404() {
         RestAssured.given()
                 .basePath(BASE_PATH)
+                .when()
                 .get("/{user_id}", "404_id")
                 .then()
                 .statusCode(HttpStatus.NOT_FOUND.value())
+                .contentType(equalTo(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .body("Error.Message", equalTo("Not Found"))
                 .body("Error.Detail", equalTo(""))
                 .body("Error.Code", equalTo(""));
@@ -69,9 +73,11 @@ public class UserApiTests {
         RestAssured.given()
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .body(body)
+                .when()
                 .post(BASE_PATH)
                 .then()
                 .statusCode(HttpStatus.CREATED.value())
+                .contentType(equalTo(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .body("id", equalTo("test_post_id"))
                 .body("value", equalTo("test_post_value"));
 
@@ -90,9 +96,11 @@ public class UserApiTests {
         RestAssured.given()
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .body(body)
+                .when()
                 .post(BASE_PATH)
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value())
+                .contentType(equalTo(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .body("Error.Message", equalTo("Bad Request"))
                 .body("Error.Detail", equalTo("id: size must be between 0 and 18; "))
                 .body("Error.Code", equalTo(""));
@@ -111,9 +119,11 @@ public class UserApiTests {
         RestAssured.given()
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .body(body)
+                .when()
                 .post(BASE_PATH)
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value())
+                .contentType(equalTo(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .body("Error.Message", equalTo("Bad Request"))
                 .body("Error.Detail", equalTo("id: must not be blank; "))
                 .body("Error.Code", equalTo(""));
@@ -129,9 +139,11 @@ public class UserApiTests {
 
         RestAssured.given()
                 .basePath(BASE_PATH)
+                .when()
                 .delete("/{user_id}", "test_id")
                 .then()
-                .statusCode(HttpStatus.NO_CONTENT.value());
+                .statusCode(HttpStatus.NO_CONTENT.value())
+                .contentType(equalTo(MediaType.APPLICATION_JSON_UTF8_VALUE));
 
         actualDataList = this.jdbcTemplate.queryForList(SELECT_SQL, "test_id");
         assertThat(actualDataList.size()).isEqualTo(0);
@@ -141,9 +153,11 @@ public class UserApiTests {
     public void deleteUserByIdNotFound() {
         RestAssured.given()
                 .basePath(BASE_PATH)
+                .when()
                 .delete("/{user_id}", "404_id")
                 .then()
                 .statusCode(HttpStatus.NOT_FOUND.value())
+                .contentType(equalTo(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .body("Error.Message", equalTo("Not Found"))
                 .body("Error.Detail", equalTo(""))
                 .body("Error.Code", equalTo(""));

@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/local
+    url: jdbc:user://localhost:3306/local
     username: root
     password:
 
@@ -12,3 +12,6 @@ spring:
     throw-exception-if-no-handler-found: true
   resources:
     add-mappings: false
+env:
+  github-repository:
+    entry-point: https://raw.githubusercontent.com

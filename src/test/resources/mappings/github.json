@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/YutaKase6/spring-api-sample/master/README.md"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "text/plain;charset=UTF-8"
+    },
+    "body": "# spring-api-sample"
+  }
+}

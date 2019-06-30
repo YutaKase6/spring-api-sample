@@ -1,7 +1,7 @@
 package com.example.springapi.infrastructure;
 
 import com.example.springapi.domain.object.User;
-import com.example.springapi.infrastructure.entity.UserEntity;
+import com.example.springapi.infrastructure.user.entity.UserEntity;
 import org.junit.Before;
 import org.junit.Test;
 

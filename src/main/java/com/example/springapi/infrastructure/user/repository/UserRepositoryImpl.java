@@ -1,9 +1,9 @@
-package com.example.springapi.infrastructure.repository;
+package com.example.springapi.infrastructure.user.repository;
 
 import com.example.springapi.domain.exception.NotFoundException;
 import com.example.springapi.domain.object.User;
 import com.example.springapi.domain.repository.UserRepository;
-import com.example.springapi.infrastructure.entity.UserEntity;
+import com.example.springapi.infrastructure.user.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;

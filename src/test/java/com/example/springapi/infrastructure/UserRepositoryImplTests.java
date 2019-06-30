@@ -1,9 +1,9 @@
 package com.example.springapi.infrastructure;
 
 import com.example.springapi.domain.object.User;
-import com.example.springapi.infrastructure.entity.UserEntity;
-import com.example.springapi.infrastructure.repository.UserJpaRepository;
-import com.example.springapi.infrastructure.repository.UserRepositoryImpl;
+import com.example.springapi.infrastructure.user.entity.UserEntity;
+import com.example.springapi.infrastructure.user.repository.UserJpaRepository;
+import com.example.springapi.infrastructure.user.repository.UserRepositoryImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
