@@ -4,7 +4,6 @@ import com.example.springapi.domain.exception.NotFoundException;
 import com.example.springapi.domain.object.User;
 import com.example.springapi.domain.repository.UserRepository;
 import com.example.springapi.infrastructure.entity.UserEntity;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Repository;
 @RequiredArgsConstructor
 public class UserRepositoryImpl implements UserRepository {
 
-    @NonNull
     private final UserJpaRepository userJpaRepository;
 
     /**

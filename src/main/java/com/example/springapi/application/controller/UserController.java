@@ -4,9 +4,11 @@ import com.example.springapi.application.resource.ErrorResponse;
 import com.example.springapi.application.resource.UserBody;
 import com.example.springapi.domain.object.User;
 import com.example.springapi.domain.service.UserService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import lombok.NonNull;
+import io.swagger.annotations.SwaggerDefinition;
+import io.swagger.annotations.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -18,9 +20,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/v1/users")
+@Api(tags = "Users")
 public class UserController {
 
-    @NonNull
     private final UserService userService;
 
     /**

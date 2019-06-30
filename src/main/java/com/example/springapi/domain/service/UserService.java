@@ -1,9 +1,7 @@
 package com.example.springapi.domain.service;
 
-import com.example.springapi.domain.exception.NotFoundException;
 import com.example.springapi.domain.object.User;
 import com.example.springapi.domain.repository.UserRepository;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService {
 
-    @NonNull
     private final UserRepository userRepository;
 
     /**
