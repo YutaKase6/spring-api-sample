@@ -3,8 +3,6 @@ package com.example.springapi.aop;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -14,7 +12,7 @@ import java.util.Arrays;
 @Component
 public class LoggingAspects {
 
-    @Before("within(com.example.springapi.application.controller.UserController)")
+    @Before("within(com.example.springapi.application.controller.*)")
     public void controllerStartLog(JoinPoint joinPoint) {
         String string = joinPoint.toString();
         String args = Arrays.toString(joinPoint.getArgs());
@@ -22,7 +20,7 @@ public class LoggingAspects {
         log.info("Start {}, args: {}", string, args);
     }
 
-    @AfterReturning("within(com.example.springapi.application.controller.UserController)")
+    @AfterReturning("within(com.example.springapi.application.controller.*)")
     public void controllerEndLog(JoinPoint joinPoint) {
         String string = joinPoint.toString();
         String args = Arrays.toString(joinPoint.getArgs());
@@ -30,7 +28,7 @@ public class LoggingAspects {
         log.info("End {}, args: {}", string, args);
     }
 
-    @AfterThrowing(value = "within(com.example.springapi.application.controller.UserController)", throwing = "e")
+    @AfterThrowing(value = "within(com.example.springapi.application.controller.*)", throwing = "e")
     public void afterException(JoinPoint joinPoint, Exception e) {
         String string = joinPoint.toString();
         String args = Arrays.toString(joinPoint.getArgs());
